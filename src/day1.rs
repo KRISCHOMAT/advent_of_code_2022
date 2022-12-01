@@ -21,7 +21,7 @@ impl TopThree {
     }
 }
 
-pub fn day1(){
+pub fn day1() {
     let input = crawl_input("2022", "1");
     let mut top = TopThree{first: 0, second: 0, third: 0};
     let mut cal: i64 = 0;

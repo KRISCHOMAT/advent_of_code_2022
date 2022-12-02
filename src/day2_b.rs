@@ -21,7 +21,6 @@ for lines in input.as_ref().unwrap().lines() {
     let opponent = line.next();
     let me = line.next().unwrap();
 
-    
     let opponent =  match opponent {
         Some("A") => Choise::Rock,
         Some("B") => Choise::Paper,
@@ -29,9 +28,7 @@ for lines in input.as_ref().unwrap().lines() {
         Some(&_) => Choise::Other,
         None => Choise::Other
     }; 
-    
-    println!("BEFORE opponent: {:?}, advice{:?}", opponent, me);
-    
+        
     let me = match opponent {
         Choise::Rock => {
             if me == "X" {
@@ -69,14 +66,12 @@ for lines in input.as_ref().unwrap().lines() {
         
         Choise::Other => Choise::Other
     };
-    
-    println!("AFTER opponent: {:?}, me {:?}", opponent, me);
-    
+        
     if me == opponent{
         match me {
-            Choise::Rock => my_score += 1 + draw,
-            Choise::Paper => my_score += 2 + draw,
-            Choise::Scissors => my_score += 3 + draw,
+            Choise::Rock => my_score += me as i64 + draw,
+            Choise::Paper => my_score += me as i64 + draw,
+            Choise::Scissors => my_score += me as i64 + draw,
             Choise::Other => my_score += 0
         }    
     } else if 
@@ -84,16 +79,16 @@ for lines in input.as_ref().unwrap().lines() {
         me == Choise::Paper && opponent == Choise::Rock || 
         me == Choise::Scissors && opponent == Choise::Paper {
         match me {
-            Choise::Rock => my_score += 1 + won,
-            Choise::Paper => my_score += 2 + won,
-            Choise::Scissors => my_score += 3 + won,
+            Choise::Rock => my_score += me as i64 + won,
+            Choise::Paper => my_score += me as i64 + won,
+            Choise::Scissors => my_score += me as i64 + won,
             Choise::Other => my_score += 0
         }
     } else {
         match me {
-            Choise::Rock => my_score += 1,
-            Choise::Paper => my_score += 2,
-            Choise::Scissors => my_score += 3,
+            Choise::Rock => my_score += me as i64,
+            Choise::Paper => my_score += me as i64,
+            Choise::Scissors => my_score += me as i64,
             Choise::Other => my_score += 0
         }
     }

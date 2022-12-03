@@ -7,16 +7,12 @@ let mut lines = input.lines();
 let mut result: i32 = 0;
 
 loop {
-
     let first = lines.next();
-    let second = lines.next();
-    let third = lines.next();
-    
     if first == None {break;}
 
     let first = first.unwrap().as_bytes();
-    let second = second.unwrap().as_bytes();
-    let third = third.unwrap().as_bytes();
+    let second = lines.next().unwrap().as_bytes();
+    let third = lines.next().unwrap().as_bytes();
 
     for e in first {
         if second.contains(e) && third.contains(e) {

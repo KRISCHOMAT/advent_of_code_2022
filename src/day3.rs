@@ -4,7 +4,7 @@ pub fn day3() {
 let input = crawl_input("2022", "3").unwrap();
 let lines = input.lines();
 let mut result: i32 = 0;
-let mut common_char = 0;
+let mut common_char: u8 = 0;
 
 
 for line in lines {

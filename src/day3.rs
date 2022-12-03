@@ -6,7 +6,6 @@ let lines = input.lines();
 let mut result: i32 = 0;
 let mut common_char: u8 = 0;
 
-
 for line in lines {
     let count = &line.chars().count();
     let halfs = (&line[..count/2].as_bytes(), &line[count/2..].as_bytes());

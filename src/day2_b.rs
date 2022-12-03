@@ -63,7 +63,6 @@ for lines in input.as_ref().unwrap().lines() {
                 Choise::Other
             }
         },
-        
         Choise::Other => Choise::Other
     };
         

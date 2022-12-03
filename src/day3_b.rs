@@ -10,24 +10,19 @@ loop {
     let first = lines.next();
     if first == None {break;}
 
-    let first = first.unwrap().as_bytes();
+    let first = first.unwrap().bytes();
     let second = lines.next().unwrap().as_bytes();
     let third = lines.next().unwrap().as_bytes();
 
     for e in first {
-        if second.contains(e) && third.contains(e) {
-            let common_char = Some(e);
-            let common_char = match common_char {
-                Some(v) => {
-                    if v <= &97 {
-                        v - &38
-                    } else {
-                        v - &96
-                    }
-                },
-                None => panic!("something went wrong"),
-            };
-
+        if second.contains(&e) && third.contains(&e) {
+            let mut common_char = e;
+            if common_char <= 97 {
+                common_char -= 38;
+            } else {
+                common_char -= 96;
+            }
+            
             result += i32::from(common_char);
             break;
         }

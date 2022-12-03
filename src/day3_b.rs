@@ -12,34 +12,30 @@ loop {
     let second = lines.next();
     let third = lines.next();
     
-    if first == None {
-        break;
-    }
-    
+    if first == None {break;}
+
     let first = first.unwrap().as_bytes();
     let second = second.unwrap().as_bytes();
     let third = third.unwrap().as_bytes();
-    let mut common_char: u8 = 0;
-    
-    for i in 0..first.len(){
 
-        for x in 0..second.len(){
-            if first[i] == second[x]{
-                for y in 0..third.len(){
-                    if second[x] == third[y]{
-                        common_char = third[y];
-                        break;
+    for e in first {
+        if second.contains(e) && third.contains(e) {
+            let common_char = Some(e);
+            let common_char = match common_char {
+                Some(v) => {
+                    if v <= &97 {
+                        v - &38
+                    } else {
+                        v - &96
                     }
-                }
-            }
+                },
+                None => panic!("something went wrong"),
+            };
+
+            result += i32::from(common_char);
+            break;
         }
     }
-     if common_char <= 97 {
-        common_char -= 38;
-    } else {
-        common_char -= 96;
-    }
-    result += i32::from(common_char);
 }
 
 println!("{}", result);

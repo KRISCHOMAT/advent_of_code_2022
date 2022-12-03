@@ -6,11 +6,8 @@ let input = crawl_input("2022", "3").unwrap();
 let mut lines = input.lines();
 let mut result: i32 = 0;
 
-loop {
-    let first = lines.next();
-    if first == None {break;}
-
-    let first = first.unwrap().bytes();
+while let Some(first) = lines.next() {
+    let first = first.bytes();
     let second = lines.next().unwrap().as_bytes();
     let third = lines.next().unwrap().as_bytes();
 
@@ -22,7 +19,7 @@ loop {
             } else {
                 common_char -= 96;
             }
-            
+
             result += i32::from(common_char);
             break;
         }

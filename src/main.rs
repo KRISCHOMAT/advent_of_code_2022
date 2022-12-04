@@ -1,7 +1,7 @@
-use day3_b::day3_b;
+use day4::day4;
 
-mod day3_b;
+mod day4;
 
 fn main() {
-   day3_b();
+   day4();
 }

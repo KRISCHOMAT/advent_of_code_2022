@@ -1,6 +1,6 @@
 use aoc_2022::crawl_input;
 
-pub fn day4(){
+pub fn day4_ab(){
     let input = crawl_input("2022","4").unwrap();
     let lines = input.lines();
     let mut count_a: i32 = 0;
@@ -26,7 +26,6 @@ pub fn day4(){
             {
                 count_b += 1;
         }
-
     }
     println!("Part 1: {}, Part 2: {}", count_a, count_b);
 }

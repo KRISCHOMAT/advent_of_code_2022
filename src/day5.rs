@@ -12,16 +12,17 @@ pub fn day5(){
     let input = crawl_input("2022", "5").unwrap();
     let lines = input.lines();
     let mut stacks: BTreeMap<usize, Vec<char>> = init_stacks(&input);
+   
     // stacks before
     for (key, value) in &stacks {
         println!("{} {:?}", key, value)
     }
 
-
     for line in lines {
     if !line.contains("move") {continue;}
     let instructions = get_instructions(line);
-        for _i in 0..instructions.amount{
+
+    for _i in 0..instructions.amount{
             let element = stacks.get_mut(&instructions.from).unwrap().pop().unwrap();
             stacks.get_mut(&instructions.to).unwrap().push(element);
         }
@@ -39,8 +40,8 @@ pub fn day5(){
         result.push(*value.last().unwrap());
     }
 
-    println!("{}", result);
-
+    // result
+    println!("RESULT: {}", result);
 }
 
 fn init_stacks(input: &str) -> BTreeMap<usize, Vec<char>>{

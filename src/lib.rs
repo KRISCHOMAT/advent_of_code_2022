@@ -42,3 +42,25 @@ pub async fn send_answer(year: &str, day: &str, level: &str, answer: &str)-> Str
 
     result.inner_html()
 }
+
+#[tokio::main]
+pub async fn get_quizz(year: &str, day: &str)-> String{
+    let key = "TOKEN";
+    let token = dotenv::var(key).unwrap();
+    let url = format!("https://adventofcode.com/{year}/day/{day}");
+    let client = Client::new();
+    let res = client.post(url)
+        .header(COOKIE, format!("session={token}"))
+        .send()
+        .await
+        .unwrap()
+        .text()
+        .await
+        .unwrap();
+
+    let fragment = Html::parse_fragment(&res);
+    let selector = Selector::parse("main").unwrap();
+    let result = fragment.select(&selector).next().unwrap();
+
+    result.inner_html()
+}

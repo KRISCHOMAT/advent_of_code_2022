@@ -10,38 +10,43 @@ struct Instructions {
 
 pub fn day5(){
     let input = crawl_input("2022", "5").unwrap();
-    let lines = input.lines();
-    let mut stacks: BTreeMap<usize, Vec<char>> = init_stacks(&input);
-   
-    // stacks before
-    for (key, value) in &stacks {
-        println!("{} {:?}", key, value)
-    }
 
-    for line in lines {
-    if !line.contains("move") {continue;}
-    let instructions = get_instructions(line);
-
-    for _i in 0..instructions.amount{
-            let element = stacks.get_mut(&instructions.from).unwrap().pop().unwrap();
-            stacks.get_mut(&instructions.to).unwrap().push(element);
-        }
-    }
+    // /* Part 1
+    // */
+    let stacks_part1 = part_1(&input);
     
-    println!("---");
-    // stacks after
-    for (key, value) in &stacks {
+    println!("--- Part 1 ---");
+    for (key, value) in &stacks_part1 {
         println!("{} {:?}", key, value)
     }
 
     let mut result = String::new();
 
-    for (_key, value) in &stacks {
+    for (_key, value) in &stacks_part1 {
         result.push(*value.last().unwrap());
     }
 
     // result
     println!("RESULT: {}", result);
+
+    /* Part 2
+    */
+    let stacks_part2 = part_2(&input);
+    
+    println!("--- Part 2 ---");
+    for (key, value) in &stacks_part2 {
+        println!("{} {:?}", key, value)
+    }
+
+    let mut result = String::new();
+
+    for (_key, value) in &stacks_part2 {
+        result.push(*value.last().unwrap());
+    }
+
+    // result
+    println!("RESULT: {}", result);
+
 }
 
 fn init_stacks(input: &str) -> BTreeMap<usize, Vec<char>>{
@@ -83,4 +88,44 @@ fn get_instructions(line: &str) -> Instructions {
         instructions.to = split.next().unwrap().parse().unwrap();
 
         instructions
+}
+
+fn part_1(input: &str)-> BTreeMap<usize, Vec<char>>{
+    let lines = input.lines();
+    let mut stacks: BTreeMap<usize, Vec<char>> = init_stacks(&input);
+
+    for line in lines {
+    if !line.contains("move") {continue;}
+    let instructions = get_instructions(line);
+
+    for _i in 0..instructions.amount{
+            let element = stacks.get_mut(&instructions.from).unwrap().pop().unwrap();
+            stacks.get_mut(&instructions.to).unwrap().push(element);
+        }
+    }
+    stacks
+}
+
+fn part_2(input: &str)-> BTreeMap<usize, Vec<char>>{
+    let lines = input.lines();
+    let mut stacks: BTreeMap<usize, Vec<char>> = init_stacks(&input);
+
+    for line in lines {
+        if !line.contains("move") {continue;}
+
+        let mut temp: Vec<char> = Vec::new();
+        let instructions = get_instructions(line);
+
+        for _i in 0..instructions.amount {
+            let element = stacks.get_mut(&instructions.from).unwrap().pop().unwrap();
+            temp.push(element);
+        }
+
+        temp.reverse();
+        
+        for e in temp{
+            stacks.get_mut(&instructions.to).unwrap().push(e);
+        }
+    }
+    stacks
 }

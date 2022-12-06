@@ -2,16 +2,17 @@ use aoc_2022::crawl_input;
 
 pub fn day6() {
     let input = crawl_input("2022", "6").unwrap();
-    let mut vec: Vec<u8> = Vec::new();
+
+    println!("Part 1: {}", calc_result(4, &input) );
+    println!("Part 2: {}", calc_result(14, &input) );
+
+}
+
+fn calc_result(num_chars: usize, input: &str) -> usize {
     let mut count = 0;
 
-    // Part 1
-    // let num_chars = 4;
-    // Part 2
-    let num_chars = 14;
-
     for _byte in input.as_bytes(){
-        vec = vec![input.as_bytes()[count]];
+        let mut vec = vec![input.as_bytes()[count]];
 
         for i in 1..num_chars {
             let element = input.as_bytes()[count+i];
@@ -25,7 +26,6 @@ pub fn day6() {
         }
 
         count += 1;
-
-}
-    println!("{:?} {}",vec, count + num_chars);
+    }
+    count + num_chars
 }

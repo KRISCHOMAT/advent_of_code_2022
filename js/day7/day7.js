@@ -1,4 +1,5 @@
 const fs = require("fs");
+
 class File {
   constructor(input) {
     this.size = input[0];
@@ -34,7 +35,6 @@ let directories = [new Directory("root")];
 let current = directories[0];
 let cmd;
 let dest;
-let total = 0;
 
 inputArray.forEach((line) => {
   if (line.startsWith("$ cd")) {
@@ -60,11 +60,29 @@ inputArray.forEach((line) => {
   }
 });
 
+// Calc Part 1
+let part1 = 0;
+let total = 0;
 directories.forEach((dir) => {
+  total += dir.size;
   if (dir.size <= 100000) {
-    //console.log(dir.size);
-    total += dir.size;
+    part1 += dir.size;
   }
 });
 
-console.log(`part 1: ${total}`);
+console.log(`part 1: ${part1}`);
+
+// Calc Part 2
+const totalDiskSpace = 70000000;
+const neededSpace = 30000000;
+const unusedSpace = totalDiskSpace - directories[0].size;
+const minSize = neededSpace - unusedSpace;
+
+let min = directories[0].size;
+directories.forEach((dir) => {
+  if (dir.size >= minSize && dir.size < min) {
+    min = dir.size;
+  }
+});
+
+console.log(`part 2: ${min}`);
